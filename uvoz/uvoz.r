@@ -2,15 +2,18 @@
 
 # Funkcija, ki uvozi podatke iz datoteke druzine.csv
 uvozitabelaigralcev <- function() {
-  return(read.csv("podatki/tabelanogometasev.csv",skip = 0, header=TRUE,
-                   col.names=c('IME NOGOMETASA','DRŽAVA','POZICIJA','LETNICE.DELOVANJA','NASTOPI','ZADETKI'),na.strings = "-",
+  return(read.csv("podatki/tabelanogometasev.csv",
+                  skip=0,
+                  header=FALSE,
+                   col.names=c('IME NOGOMETASA','DRŽAVA','POZICIJA','LETNICE.DELOVANJA','NASTOPI','ZADETKI'),
+                  na.strings = "-",
                    fileEncoding = "Windows-1250"))
 }
 
 # Zapišimo podatke v razpredelnico nogometasi.
 cat("Uvažam podatke o nogometaših...\n")
 nogometasi <- uvozitabelaigralcev()
-View(nogometasi)
+
 attach(nogometasi)
 kategorije<-c('Začetnik v Arsenalu','Izkušenj Arsenalovec','Arsenalova legenda')
 STATUSS<-character(nrow(nogometasi))
@@ -23,6 +26,7 @@ dodatenstolpec<-data.frame(STATUS)
 NOGOMETASI<-merge(nogometasi,dodatenstolpec, by = 0,all=TRUE)
 NOGOMETASI<- NOGOMETASI[-1]
 rownames(NOGOMETASI) <- NULL
+View(NOGOMETASI)
 
 #dodatna tabela
 attach(NOGOMETASI)
@@ -70,3 +74,11 @@ daljšizapis[imenapozicij="RW"]='Right winger'
 daljšizapis[imenapozicij="RW/FW"]='Right winger/Forward'
 daljšizapis[imenapozicij="RW/LW"]='Right winger/Left winger'
 daljšizapis[imenapozicij="RW/MF"]='Right winger/Midfielder'
+
+golipopozicijah<-sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZICIJA"] == x, "ZADETKI"]))
+nastopipopozicijah<- sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZICIJA"] == x, "NASTOPI"]))
+povprecjegolovnapozicijo<-golipopozicijah/nastopipopozicijah
+detach(NOGOMETASI)
+PODTABELAPOPOZICIJAH<-data.frame(POZICIJA=imenapozicij,POPOLNO.IME=daljšizapis,PREVOD=prevodi,ŠTEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVREČJE.ZADETKOV.NA.ŠTEVILO.NASTOPOV=povprecjegolovnapozicijo)
+rownames(PODTABELAPOPOZICIJAH) <- NULL
+
