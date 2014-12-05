@@ -1,6 +1,6 @@
 # 2. faza: Uvoz podatkov
 
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
+# Funkcija, ki uvozi podatke iz datoteke tabelanogometasev.csv
 uvozitabelaigralcev <- function() {
   return(read.csv("podatki/tabelanogometasev.csv",
                   skip=0,
@@ -22,8 +22,8 @@ STATUSS[NASTOPI >=150 & NASTOPI<300]<-'Izkušenj Arsenalovec'
 STATUSS[NASTOPI >=300]<-'Arsenalova legenda'
 STATUS<-factor(STATUSS,levels=kategorije,ordered=TRUE)
 detach(nogometasi)
-dodatenstolpec<-data.frame(STATUS)
-NOGOMETASI<-merge(nogometasi,dodatenstolpec, by = 0,all=TRUE)
+dodatenstolpec1<-data.frame(STATUS)
+NOGOMETASI<-merge(nogometasi,dodatenstolpec1, by = 0,all=TRUE)
 NOGOMETASI<- NOGOMETASI[-1]
 rownames(NOGOMETASI) <- NULL
 View(NOGOMETASI)
@@ -82,3 +82,42 @@ detach(NOGOMETASI)
 PODTABELAPOPOZICIJAH<-data.frame(POZICIJA=imenapozicij,POPOLNO.IME=daljšizapis,PREVOD=prevodi,ŠTEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVREČJE.ZADETKOV.NA.ŠTEVILO.NASTOPOV=povprecjegolovnapozicijo)
 rownames(PODTABELAPOPOZICIJAH) <- NULL
 
+# Uvoz s spletne strani Wiki
+
+library(XML)
+
+stripByPath <- function(x, path) {
+  unlist(xpathApply(x, path,
+                    function(y) gsub("^\\s*(.*?)\\s*$", "\\1",
+                                     gsub("^(.*?)\\[.*$", "\\1",
+                                          xmlValue(y)))))
+}
+
+uvozi.arsenal <- function() {
+  url.arsenal <- "http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players"
+  doc.arsenal <- htmlTreeParse(url.arsenal, useInternalNodes=TRUE)
+  
+  for (t in getNodeSet(doc.arsenal, "//span[@style='display:none']|//span[@class='sortkey']")) {
+    xmlValue(t) <- ""
+  } 
+  
+  tabele <- getNodeSet(doc.arsenal, "//table")
+  
+  vrstice <- getNodeSet(tabele[[2]], "./tr")
+  
+  seznam <- lapply(vrstice[2:length(vrstice)], stripByPath, "./td")
+  
+  matrika <- matrix(unlist(seznam), nrow=length(seznam), byrow=TRUE)
+  
+  colnames(matrika) <- gsub("\n", " ", stripByPath(vrstice[[1]], ".//th"))
+  
+  zacetek <- as.numeric(gsub("^([0-9]{4}).*", "\\1", matrika[,4]))
+
+  konec <- as.numeric(gsub(".*[^0-9]([0-9]*)$", "\\1", matrika[,4]))
+  
+  return(data.frame(matrika[,2:4], First.year = zacetek, Last.year = konec,
+                    apply(matrika[,5:6], 2, as.numeric), row.names=matrika[,1]))
+}
+# Zapišimo podatke v razpredelnico arsenal in spletne strani
+cat("Uvažam tabelo iz spletne strani")
+arsenal<-uvozi.arsenal()
