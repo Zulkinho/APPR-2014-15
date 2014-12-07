@@ -26,7 +26,6 @@ dodatenstolpec1<-data.frame(STATUS)
 NOGOMETASI<-merge(nogometasi,dodatenstolpec1, by = 0,all=TRUE)
 NOGOMETASI<- NOGOMETASI[-1]
 rownames(NOGOMETASI) <- NULL
-View(NOGOMETASI)
 
 #dodatna tabela
 attach(NOGOMETASI)
@@ -121,3 +120,13 @@ uvozi.arsenal <- function() {
 # Zapišimo podatke v razpredelnico arsenal in spletne strani
 cat("Uvažam tabelo iz spletne strani")
 arsenal<-uvozi.arsenal()
+
+attach(arsenal)
+kategorija<-c('Beginner','Grown up','Legend')
+statuss<-character(nrow(arsenal))
+statuss[Appearances <150]<-'Beginner'
+statuss[Appearances >=150 & Appearances<300]<-'Grown up'
+statuss[Appearances >=300]<-'Legend'
+status<-factor(statuss,levels=kategorija,ordered=TRUE)
+detach(arsenal)
+ARSENAL<-data.frame(arsenal,status)
