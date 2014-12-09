@@ -1,11 +1,6 @@
 # 2. faza: Uvoz podatkov
 
 
-# Funkcija, ki uvozi podatke iz datoteke druzine.csv
-uvozitabelaigralcev <- function() {
-  return(read.csv2("podatki/tabelanogometasev.csv",skip = 0, header=TRUE,
-                   col.names=c('IME NOGOMETASA','DRŽAVA','POZICIJA','LETNICE.DELOVANJA','NASTOPI','ZADETKI'),na.strings = "-",
-
 # Funkcija, ki uvozi podatke iz datoteke tabelanogometasev.csv
 uvozitabelaigralcev <- function() {
   return(read.csv("podatki/tabelanogometasev.csv",
@@ -16,7 +11,7 @@ uvozitabelaigralcev <- function() {
                    fileEncoding = "Windows-1250"))
 }
 
-# Zapišimo podatke v razpredelnico nogometasi.
+# Zapisimo podatke v razpredelnico nogometasi.
 cat("Uvažam podatke o nogometaših...\n")
 nogometasi <- uvozitabelaigralcev()
 
