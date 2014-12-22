@@ -1,19 +1,21 @@
 # 2. faza: Uvoz podatkov
 
+
 # Funkcija, ki uvozi podatke iz datoteke tabelanogometasev.csv
 uvozitabelaigralcev <- function() {
   return(read.csv("podatki/tabelanogometasev.csv",
                   skip=0,
-                  header=FALSE,
-                   col.names=c('IME NOGOMETASA','DRŽAVA','POZICIJA','LETNICE.DELOVANJA','NASTOPI','ZADETKI'),
+                  header=TRUE,
+                  row.names = 1,
                   na.strings = "-",
                    fileEncoding = "Windows-1252"))
 }
 
-# Zapišimo podatke v razpredelnico nogometasi.
+# Zapisimo podatke v razpredelnico nogometasi.
 cat("Uvažam podatke o nogometaših...\n")
 nogometasi <- uvozitabelaigralcev()
 
+View(nogometasi)
 attach(nogometasi)
 kategorije<-c('Začetnik v Arsenalu','Izkušenj Arsenalovec','Arsenalova legenda')
 STATUSS<-character(nrow(nogometasi))
@@ -22,10 +24,8 @@ STATUSS[NASTOPI >=150 & NASTOPI<300]<-'Izkušenj Arsenalovec'
 STATUSS[NASTOPI >=300]<-'Arsenalova legenda'
 STATUS<-factor(STATUSS,levels=kategorije,ordered=TRUE)
 detach(nogometasi)
-dodatenstolpec1<-data.frame(STATUS)
-NOGOMETASI<-merge(nogometasi,dodatenstolpec1, by = 0,all=TRUE)
-NOGOMETASI<- NOGOMETASI[-1]
-rownames(NOGOMETASI) <- NULL
+NOGOMETASI<-data.frame(nogometasi, STATUS)
+rm("STATUS")
 
 #dodatna tabela
 attach(NOGOMETASI)
@@ -78,8 +78,8 @@ golipopozicijah<-sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZ
 nastopipopozicijah<- sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZICIJA"] == x, "NASTOPI"]))
 povprecjegolovnapozicijo<-golipopozicijah/nastopipopozicijah
 detach(NOGOMETASI)
-PODTABELAPOPOZICIJAH<-data.frame(POZICIJA=imenapozicij,POPOLNO.IME=daljšizapis,PREVOD=prevodi,ŠTEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVREČJE.ZADETKOV.NA.ŠTEVILO.NASTOPOV=povprecjegolovnapozicijo)
-rownames(PODTABELAPOPOZICIJAH) <- NULL
+PODTABELAPOPOZICIJAH<-data.frame(POPOLNO.IME=daljšizapis,PREVOD=prevodi,ŠTEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVREČJE.ZADETKOV.NA.ŠTEVILO.NASTOPOV=povprecjegolovnapozicijo)
+
 
 # Uvoz s spletne strani Wiki
 
@@ -127,6 +127,7 @@ statuss<-character(nrow(arsenal))
 statuss[Appearances <150]<-'Beginner'
 statuss[Appearances >=150 & Appearances<300]<-'Grown up'
 statuss[Appearances >=300]<-'Legend'
-status<-factor(statuss,levels=kategorija,ordered=TRUE)
+Status<-factor(statuss,levels=kategorija,ordered=TRUE)
 detach(arsenal)
-ARSENAL<-data.frame(arsenal,status)
+ARSENAL<-data.frame(arsenal,Status)
+
