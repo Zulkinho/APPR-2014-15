@@ -8,7 +8,7 @@ uvozitabelaigralcev <- function() {
                   header=TRUE,
                   row.names = 1,
                   na.strings = "-",
-                   fileEncoding = "Windows-1250"))
+                   fileEncoding = "Windows-1252"))
 }
 
 # Zapisimo podatke v razpredelnico nogometasi.
