@@ -1,0 +1,20 @@
+IGRALNO MESTO,POPOLNO IME,PREVOD,STEVILO IGRALCEV,NASTOPI PO POZICIJAH,ZADETKI PO POZICIJAH,POVPRECJE ZADETKOV NA STEVILO NASTOPOV
+GK,Goalkeeper,Vratar,17,3951,1,0.000253101
+RB,Right back,Desni bocni branilec,15,3630,105,0.02892562
+RB/LB,Right back/Left back,Desni bocni branilec/Levi bocni branilec,4,686,13,0.018950437
+RB/MF,Right back/Midfielder,Desni bocni branilec/Vezist,1,501,17,0.033932136
+CB,Centre back,Osrednji branilec,24,6646,271,0.040776407
+CB/LB,Centre back/Left back,Osrednji branilec/Levi bocni branilec,1,179,20,0.111731844
+CB/MF,Centre back/Midfielder,Osrednji branilec/Vezist,2,572,38,0.066433566
+LB,Left back,Levi bocni branilec,15,4112,77,0.018725681
+LB/MF,Left back/Midfielder,Levi bocni branilec/Vezist,2,346,15,0.043352601
+MF,Midfielder,Vezist,59,12556,1409,0.112217267
+RW,Right winger,Desni bocni napadalec,10,2032,453,0.222933071
+RW/MF,Right winger/Midfielder,Desni bocni napadalec/Vezist,1,138,18,0.130434783
+RW/LW,Right winger/Left winger,Desni bocni napadalec/Levi bocni napadalec,2,784,89,0.113520408
+RW/FW,Right winger/Forward,Desni bocni napadalec/Napadelec,1,283,69,0.243816254
+LW,Left winger,Levi bocni napadalec,10,2042,490,0.239960823
+LW/MF,Left winger/Midfielder,Levi bocni napadalec/Vezist,1,195,8,0.041025641
+FW,Forward,Napadelec,41,8566,3369,0.393299089
+FW/MF,Forward/Midfielder,Napadelec/Vezist,2,457,141,0.308533917
+FW/RW,Forward/Right winger,Napadelec/Desni bocni napadalec,1,423,99,0.234042553
