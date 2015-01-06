@@ -9,23 +9,21 @@ svet <- uvozi.zemljevid("http://www.naturalearthdata.com/http//www.naturalearthd
                         "svet", "ne_110m_admin_0_map_units.shp", mapa = "zemljevid",
                         encoding = "Windows-1252")
 
-svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Brazil",]
+svet1<- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Brazil",]
 
-pdf("slike/igralci.pdf", width=8.27, height=11.69)
-plot(svet, xlim=c(-50, 34), ylim=c(-33,73), col="white", bg="lightblue")
+
+drzave <- table(nogometasi$DRZAVA)
+names(drzave)[16] <- "Russian Federation"
+stevilo <- unique(drzave)
+stevilo <- stevilo[order(stevilo)]
+barve <- topo.colors(length(stevilo))[match(drzave, stevilo)]
+names(barve) <- names(drzave)
+barve.zemljevid <- barve[as.character(svet1$name_long)]
+barve.zemljevid[is.na(barve.zemljevid)] <- "white"
+legend("topleft", legend = stevilo, fill = topo.colors(length(stevilo)))
+pdf("slike/igralci.pdf", width=8.27, height=11.96)
+plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
 dev.off()
-
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Scotland",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "England",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Northern Ireland",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Wales",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Ireland",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Sweden",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Denmark",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Netherlands",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Denmark",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Denmark",]
-# svet <- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Denmark",]
 
 
 # # Funkcija, ki podatke preuredi glede na vrstni red v zemljevidu
