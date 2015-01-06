@@ -15,7 +15,6 @@ uvozitabelaigralcev <- function() {
 cat("Uvažam podatke o nogometaših...\n")
 nogometasi <- uvozitabelaigralcev()
 
-View(nogometasi)
 attach(nogometasi)
 kategorije<-c('Začetnik v Arsenalu','Izkušenj Arsenalovec','Arsenalova legenda')
 STATUSS<-character(nrow(nogometasi))
@@ -130,4 +129,12 @@ statuss[Appearances >=300]<-'Legend'
 Status<-factor(statuss,levels=kategorija,ordered=TRUE)
 detach(arsenal)
 ARSENAL<-data.frame(arsenal,Status)
+
+UREJENAPODTABELA<-read.csv("podatki/podtabela.csv",
+         skip=0,
+         row.name=1,
+         header=TRUE,
+         na.strings = "-",
+         fileEncoding = "Windows-1252")
+
 
