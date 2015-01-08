@@ -20,9 +20,10 @@ barve <- topo.colors(length(stevilo))[match(drzave, stevilo)]
 names(barve) <- names(drzave)
 barve.zemljevid <- barve[as.character(svet1$name_long)]
 barve.zemljevid[is.na(barve.zemljevid)] <- "white"
-legend("topleft", legend = stevilo, fill = topo.colors(length(stevilo)))
+
 pdf("slike/igralci.pdf", width=8.27, height=11.96)
 plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
+legend("topleft", title = 'število igralcev po državah', text.font = 3,legend = stevilo, fill = topo.colors(length(stevilo)))
 dev.off()
 
 
