@@ -13,6 +13,7 @@ svet1<- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Braz
 
 
 drzave <- table(nogometasi$DRZAVA)
+imenadrzav<-names(drzave)
 names(drzave)[16] <- "Russian Federation"
 stevilo <- unique(drzave)
 stevilo <- stevilo[order(stevilo)]
@@ -21,8 +22,19 @@ names(barve) <- names(drzave)
 barve.zemljevid <- barve[as.character(svet1$name_long)]
 barve.zemljevid[is.na(barve.zemljevid)] <- "white"
 
+mojsvet <- svet1[svet1$name_long %in% imenadrzav,]
+koordinate <- coordinates(mojsvet)
+imena.drzav <- as.character(mojsvet$name_long)
+rownames(koordinate) <- imena.drzav
+koordinate["Spain",2] <- koordinate["Spain",2]+1.5
+koordinate["Brazil",1] <- koordinate["Brazil",1]+1.5
+
+
+
+
 pdf("slike/igralci.pdf", width=8.27, height=11.96)
 plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
+text(koordinate,labels=imena.drzav,pos = 1, cex = 0.3,)
 legend("topleft", title = 'število igralcev po državah', text.font = 3,legend = stevilo, fill = topo.colors(length(stevilo)))
 dev.off()
 
