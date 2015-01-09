@@ -6,7 +6,7 @@ Kot strasten navijač nogometnega kluba Arsenal F.C. sem za svojo temo analizira
 - letnice delovanja v omenjenem nogometnem klubu (številska spremenljivka, podana v obliki od-do)
 - število nastopov za klub (številska spremenljivka)
 - število zadetkov za klub (številska spremenljivka)
-- status nogometaša v klubu (urejenostna spremenljivka, katero bom opredelil glede na število nastopov, ki jih je nogometaš dosegel v klubu. Nogometaše bom razdelil v tri skupine: "Začetnik v Arsenalu"(do 150 nastopov), "izkušenj Arsenalovec"(od 150-300 nastopov), "Arsenalova legenda"(nad 300 nastopov)).
+- status nogometaša v klubu (urejenostna spremenljivka, katero bom opredelil glede na število nastopov, ki jih je nogometaš dosegel v klubu. Nogometaše bom razdelil v tri skupine: "Začetnik v Arsenalu"(do 150 nastopov), "Izkušen Arsenalovec"(od 150-300 nastopov), "Arsenalova legenda"(nad 300 nastopov)).
 Države, katerih državljani so bili in so še nogometaši bom prikazal tudi na zemljevidu.
 
 Cilj projekta je ugotovitev katerim nogometašem se je uspelo prebiti v klubsko zgodovino s svojim doprinosom v klubu, predvsem pa spoznavanje orodja analiziranja v programu R na nekem konkretnem, zame osebno zanimivem primeru. 

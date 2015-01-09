@@ -77,7 +77,7 @@ golipopozicijah<-sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZ
 nastopipopozicijah<- sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI["POZICIJA"] == x, "NASTOPI"]))
 povprecjegolovnapozicijo<-golipopozicijah/nastopipopozicijah
 detach(NOGOMETASI)
-PODTABELAPOPOZICIJAH<-data.frame(POPOLNO.IME=daljšizapis,PREVOD=prevodi,ŠTEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVREČJE.ZADETKOV.NA.ŠTEVILO.NASTOPOV=povprecjegolovnapozicijo)
+PODTABELAPOPOZICIJAH<-data.frame(POPOLNO.IME=daljšizapis,PREVOD=prevodi,STEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVRECJE.ZADETKOV.NA.STEVILO.NASTOPOV=povprecjegolovnapozicijo)
 
 
 # Uvoz s spletne strani Wiki
