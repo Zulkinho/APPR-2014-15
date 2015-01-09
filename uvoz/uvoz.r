@@ -16,10 +16,10 @@ cat("Uvažam podatke o nogometaših...\n")
 nogometasi <- uvozitabelaigralcev()
 
 attach(nogometasi)
-kategorije<-c('Začetnik v Arsenalu','Izkušenj Arsenalovec','Arsenalova legenda')
+kategorije<-c('Začetnik v Arsenalu','Izkušen Arsenalovec','Arsenalova legenda')
 STATUSS<-character(nrow(nogometasi))
 STATUSS[NASTOPI <150]<-'Začetnik v Arsenalu'
-STATUSS[NASTOPI >=150 & NASTOPI<300]<-'Izkušenj Arsenalovec'
+STATUSS[NASTOPI >=150 & NASTOPI<300]<-'Izkušen Arsenalovec'
 STATUSS[NASTOPI >=300]<-'Arsenalova legenda'
 STATUS<-factor(STATUSS,levels=kategorije,ordered=TRUE)
 detach(nogometasi)
