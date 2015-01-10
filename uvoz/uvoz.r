@@ -26,6 +26,56 @@ detach(nogometasi)
 NOGOMETASI<-data.frame(nogometasi, STATUS)
 rm("STATUS")
 
+# Uvoz s spletne strani Wiki
+library(XML)
+
+stripByPath <- function(x, path) {
+  unlist(xpathApply(x, path,
+                    function(y) gsub("^\\s*(.*?)\\s*$", "\\1",
+                                     gsub("^(.*?)\\[.*$", "\\1",
+                                          xmlValue(y)))))
+}
+
+uvozi.arsenal <- function() {
+  url.arsenal <- "http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players"
+  doc.arsenal <- htmlTreeParse(url.arsenal, useInternalNodes=TRUE)
+  
+  for (t in getNodeSet(doc.arsenal, "//span[@style='display:none']|//span[@class='sortkey']")) {
+    xmlValue(t) <- ""
+  } 
+  
+  tabele <- getNodeSet(doc.arsenal, "//table")
+  
+  vrstice <- getNodeSet(tabele[[2]], "./tr")
+  
+  seznam <- lapply(vrstice[2:length(vrstice)], stripByPath, "./td")
+  
+  matrika <- matrix(unlist(seznam), nrow=length(seznam), byrow=TRUE)
+  
+  colnames(matrika) <- gsub("\n", " ", stripByPath(vrstice[[1]], ".//th"))
+  
+  zacetek <- as.numeric(gsub("^([0-9]{4}).*", "\\1", matrika[,4]))
+  
+  konec <- as.numeric(gsub(".*[^0-9]([0-9]*)$", "\\1", matrika[,4]))
+  
+  return(data.frame(matrika[,2:4], First.year = zacetek, Last.year = konec,
+                    apply(matrika[,5:6], 2, as.numeric), row.names=matrika[,1]))
+}
+# Zapišimo podatke v razpredelnico arsenal in spletne strani
+cat("Uvažam tabelo iz spletne strani")
+arsenal<-uvozi.arsenal()
+
+attach(arsenal)
+kategorija<-c('Beginner','Grown up','Legend')
+statuss<-character(nrow(arsenal))
+statuss[Appearances <150]<-'Beginner'
+statuss[Appearances >=150 & Appearances<300]<-'Grown up'
+statuss[Appearances >=300]<-'Legend'
+Status<-factor(statuss,levels=kategorija,ordered=TRUE)
+detach(arsenal)
+ARSENAL<-data.frame(arsenal,Status)
+
+
 #dodatna tabela
 attach(NOGOMETASI)
 pozicija<-c(table(POZICIJA))
@@ -78,57 +128,6 @@ nastopipopozicijah<- sapply(imenapozicij, function(x) sum(NOGOMETASI[NOGOMETASI[
 povprecjegolovnapozicijo<-golipopozicijah/nastopipopozicijah
 detach(NOGOMETASI)
 PODTABELAPOPOZICIJAH<-data.frame(POPOLNO.IME=daljšizapis,PREVOD=prevodi,STEVILO.IGRALCEV=pozicija,NASTOPI.PO.POZICIJAH=nastopipopozicijah, ZADETKI.PO.POZICIJAH=golipopozicijah,POVRECJE.ZADETKOV.NA.STEVILO.NASTOPOV=povprecjegolovnapozicijo)
-
-
-# Uvoz s spletne strani Wiki
-
-library(XML)
-
-stripByPath <- function(x, path) {
-  unlist(xpathApply(x, path,
-                    function(y) gsub("^\\s*(.*?)\\s*$", "\\1",
-                                     gsub("^(.*?)\\[.*$", "\\1",
-                                          xmlValue(y)))))
-}
-
-uvozi.arsenal <- function() {
-  url.arsenal <- "http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players"
-  doc.arsenal <- htmlTreeParse(url.arsenal, useInternalNodes=TRUE)
-  
-  for (t in getNodeSet(doc.arsenal, "//span[@style='display:none']|//span[@class='sortkey']")) {
-    xmlValue(t) <- ""
-  } 
-  
-  tabele <- getNodeSet(doc.arsenal, "//table")
-  
-  vrstice <- getNodeSet(tabele[[2]], "./tr")
-  
-  seznam <- lapply(vrstice[2:length(vrstice)], stripByPath, "./td")
-  
-  matrika <- matrix(unlist(seznam), nrow=length(seznam), byrow=TRUE)
-  
-  colnames(matrika) <- gsub("\n", " ", stripByPath(vrstice[[1]], ".//th"))
-  
-  zacetek <- as.numeric(gsub("^([0-9]{4}).*", "\\1", matrika[,4]))
-
-  konec <- as.numeric(gsub(".*[^0-9]([0-9]*)$", "\\1", matrika[,4]))
-  
-  return(data.frame(matrika[,2:4], First.year = zacetek, Last.year = konec,
-                    apply(matrika[,5:6], 2, as.numeric), row.names=matrika[,1]))
-}
-# Zapišimo podatke v razpredelnico arsenal in spletne strani
-cat("Uvažam tabelo iz spletne strani")
-arsenal<-uvozi.arsenal()
-
-attach(arsenal)
-kategorija<-c('Beginner','Grown up','Legend')
-statuss<-character(nrow(arsenal))
-statuss[Appearances <150]<-'Beginner'
-statuss[Appearances >=150 & Appearances<300]<-'Grown up'
-statuss[Appearances >=300]<-'Legend'
-Status<-factor(statuss,levels=kategorija,ordered=TRUE)
-detach(arsenal)
-ARSENAL<-data.frame(arsenal,Status)
 
 UREJENAPODTABELA<-read.csv("podatki/podtabela.csv",
          skip=0,

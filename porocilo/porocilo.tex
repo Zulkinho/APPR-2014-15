@@ -3,38 +3,58 @@
 \usepackage[slovene]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{pdfpages}
 
 \pagestyle{plain}
 
 \begin{document}
 \title{Poročilo pri predmetu \\
 Analiza podatkov s programom R}
-\author{Študent FMF}
+\author{Jure Zukanovič}
 \maketitle
 
-\section{Izbira teme}
+\section{IZBIRA TEME}
+\subsection{Predstavitev teme}
 Kot strasten navijač nogometnega kluba Arsenal F.C. sem za svojo temo analiziranja izbral Analiza igralcev nogometnega kluba Arsenal Football Club. Osnovna ideja je analiza vsakega igralca v zgodovini nogometnega kluba po različnih spremenljivkah treh tipov. Podatke iz spletne strani bom prenesel v program  Microsoft Office Excel Worksheet in tako oblikoval novo tabelo, ki se bo od originalne razlikovala še za dodano urejenostno spremenljivo, ki v originalni tabeli ni podana. Tabelo bom shranil v CSV obliki, tako da jo bom lahko uvozil v program  R. Za vsakega igralca, ki je kadarkoli zaigral za Arsenal F.C., bom podal: 
-- državo iz katere igralec prihaja (imenska spremenljivka)
-- njegovo standardno pozicijo v igri (imenska spremenljivka,ki bo podana v angleških,mednarodnih kraticah)
-- letnice delovanja v omenjenem nogometnem klubu (številska spremenljivka, podana v obliki od-do)
-- število nastopov za klub (številska spremenljivka)
-- število zadetkov za klub (številska spremenljivka)
-- status nogometaša v klubu (urejenostna spremenljivka, katero bom opredelil glede na število nastopov, ki jih je nogometaš dosegel v klubu. Nogometaše bom razdelil v tri skupine: "Začetnik v Arsenalu"(do 150 nastopov), "izkušenj Arsenalovec"(od 150-300 nastopov), "Arsenalova legenda"(nad 300 nastopov)).
+\begin{itemize}
+\item{državo iz katere igralec prihaja (imenska spremenljivka)}
+\item{njegovo standardno pozicijo v igri (imenska spremenljivka,ki bo podana v angleških,mednarodnih kraticah)}
+\item{letnice delovanja v omenjenem nogometnem klubu (številska spremenljivka, podana v obliki od-do)}
+\item{število nastopov za klub (številska spremenljivka)}
+\item{število zadetkov za klub (številska spremenljivka)}
+\item{status nogometaša v klubu (urejenostna spremenljivka, katero bom opredelil glede na število nastopov, ki jih je nogometaš dosegel v klubu. Nogometaše bom razdelil v tri skupine: "Začetnik v Arsenalu"(do 150 nastopov), "izkušenj Arsenalovec"(od 150 do300 nastopov), "Arsenalova legenda"(od 300 nastopov))}
+\end{itemize}
 Države, katerih državljani so bili in so še nogometaši bom prikazal tudi na zemljevidu.
 
+\subsection{Cilj}
 Cilj projekta je ugotovitev katerim nogometašem se je uspelo prebiti v klubsko zgodovino s svojim doprinosom v klubu, predvsem pa spoznavanje orodja analiziranja v programu R na nekem konkretnem, zame osebno zanimivem primeru. 
 
+\subsection{Podatki}
 Povezava do podatkovne tabele o moji tematiki: 
-http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players
+\begin{enumerate}
+\item{\url{http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players}}
+\end{enumerate}
 
-\section{Obdelava, uvoz in čiščenje podatkov}
+\newpage
+\section{OBDELAVA, UVOZ IN ČIŠČENJE PODATKOV}
+V tej fazi sem za začetek uvozil tabelo, ki se imenuje nogometasi. To tabelo sem dobil tako, da sem podatke iz spletne strani pretvoril v Excel ter jih shranil v CSV obliki. Nato sem tabelo v program uvozil s pomočjo uvoza CSV datoteke (read.csv). Zatem sem naredil urejenostni vektor z namenom, da tabeli nogometasi dodam stolpec z urejenostno spremenjivko za vsakega igralca posebej (v izbiri teme je pojasnjeno kakšno urejenostno spremenjivko sem dodal). Z ukazom data.frame sem tabeli nogometasi dodal stolpec z urejenostno spremenljivko ter novo tabelo zaradi preglednosti poimenoval z velikimi tiskanimi črkami(NOGOMETASI). Vse glavne tabele, v katerih sem in bom obdeloval podatke sem shranil pod imena z velikimi tiskanimi črkami. Tako vem v katerih tabelah se nahajajo vsi podatki potrebni za obdelavo.
+Sledil je uvoz s spletne strani. Tabelo, iz katere sem podatke prej pretvoril v excel sem sedaj uvozil kar iz spletne strani. Potrebno je bilo v program unesti knjižnico XML, brez katere uvoz nebi bil mogoč. Uvoženo tabelo sem poimenovl arsenal. Tudi tej tabeli je bilo potrebno dodati stolpec z urejenostno spremenljivko. Nastala je tabela ARSENAL. Tabeli ARSENAL in NOGOMETASI sta po podatkih praktično identični, le da so imena stolpcev in vrednosti v stolpcu  Status v tabeli ARSENAL podane v angleščini(Beginner,Grown up,Legend). Za analizo sem si zaradi zapisa v slovenščini raje izbral tabelo NOGOMETASI.
+Sledila je izdelava dodatne tabele. Smiselno se mi je zdelo, da naredim analizo igrilnih mest, glede na podatke v tabeli NOGOMETASI. V podtabeli z imenom PODTABELAPOPOZICIJAH so imena vrstic mednarodne kratice pozicij. V tej tabeli so prikazana še popolna imena igralnih pozicij, prevodi v slovenščino, število igralcev v zgodovini kluba za vsako pozicijo, število nastopov po pozicijah, zadetki po pozicijah ter povprečje zadetkov na število nastopov.Ker je bil prvi namen narediti podtabelo zato, da bi imel dva grafa, ki bi smiselno predstavljala različne stvari, sem s po nasvetu profesorja odločil, da naredim še eno podtabelo, ki bo naredila graf pozicij bolj urejen. Podtabela UREJENAPODTABELA vsebuje enake podatke kot PODTABELAPOPOZICIJAH le, da bo na prvem mestu v tabeli vratar, nato branilci in na koncu še napadalci. To tabelo sem dobil tako, da sem podatke iz podtabele PODTABELAPOPOZICIJAH tretvoril v excel po takem vrstenm redu kot je napisano v prejšnjem stavku. Zatem sem excel datoteko shranil v CSV obliki ter jo po že znani poti uvozil v R.
 
-\section{Analiza in vizualizacija podatkov}
+Ko sem zaklučil z uvozom sem se lotil risanja grafov. Prvi graf, z imenom ŠTEVILO NASTOPOV GLEDE NA POZICIJO sem dobil tako, da sem s funkcijo barplot() prikazal podatke iz tabele UREJENAPODTABELA. Za prikaz sem izbral imenapozicij, ki so kar imena vrsic (rownames(UREJENAPODTABELA)) v tabeli in pa stolpec NASTOPI.PO.POZICIJAH.
+Drugi draf pa sem poimenoval ŠTEVILO ZADETKOV IGRALCEV, KI SO ZADELI VEC KOT 100−KRAT. V tem grafu sem prikazal koliko zadetkov so dosegli igralci, ki so za klub zadeli več kot 100-krat. Tudi za drugi graf sem uporabil funkcijo barplot(), saj se mi je stolpični prikaz zdel za moja grafa najbol pregleden. Za barvo stolpcev sem izbrav rdečo, saj je le ta tudi klubska barva.
 
-\includegraphics{../slike/povprecna_druzina.pdf}
+\includepdf[pages={1-2}]{../slike/grafi.pdf}
+\includepdf[pages={1-2}]{../slike/grafi1.pdf}
 
-\section{Napredna analiza podatkov}
+\newpage
+\section{ANALIZA IN VIZUALIZACIJA PODATKOV}
+V tej fazi sem naredil zemjevid, ki prikazuje iz katerih držav prihajajo igralci mojega omiljenega kluba. Za začetek sem uvozil zemljevid Evrope ter Afrike, kateremu sem dodal še Brazilijo, saj nogometaši, ki so kadarkoli zaigrali za Arsenal FC prihajajo ali so prihajali le iz teh dveh celin in Brazilije. Nato sem na zemljevidu obarval le tiste države, iz katerih prihajajo igralci. Te države sem tudi poimenoval, tako da človek, ki ni ravno poznavalec geografije ve katere države so zastopali ali jih še zastopajo moji nogometaši. Za zaključek sem na zamljevid narisal še kje se nahaja stadion nogometnega kluba. Za barvo pike sem izbral rdečo iz enakih razlogov kot pri stolpcih v grafih.
 
-\includegraphics{../slike/naselja.pdf}
+\includegraphics[width=\textwidth]{../slike/igralci.pdf}
+
+\section{NAPREDNA ANALIZA PODATKOV}
 
 \end{document}
