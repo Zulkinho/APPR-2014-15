@@ -13,7 +13,7 @@ svet1<- svet[svet$continent %in% c("Europe", "Africa") | svet$name_long == "Braz
 
 drzave <- table(nogometasi$DRZAVA)
 names(drzave)[16] <- "Russian Federation"
-names(drzave)[11] <- "Côte d'Ivoire"
+names(drzave)[11] <- "CÃ´te d'Ivoire"
 imenadrzav<-names(drzave)
 stevilo <- unique(drzave)
 stevilo <- stevilo[order(stevilo)]
@@ -53,7 +53,7 @@ koordinate["Switzerland",2] <- koordinate["Switzerland",2]+1.9
 koordinate["France",2] <- koordinate["France",2]+2.0
 koordinate["Russian Federation",1] <- koordinate["Russian Federation",1]-56.0
 koordinate["Russian Federation",2] <- koordinate["Russian Federation",2]-2.5
-koordinate["Côte d'Ivoire",2] <- koordinate["Côte d'Ivoire",2]+1.7
+koordinate["CÃ´te d'Ivoire",2] <- koordinate["CÃ´te d'Ivoire",2]+1.7
 koordinate["Netherlands",2] <- koordinate["Netherlands",2]+3.5
 koordinate["Netherlands",1] <- koordinate["Netherlands",1]-1.8
 koordinate["Denmark",2] <- koordinate["Denmark",2]+2.8
@@ -68,7 +68,7 @@ pdf("slike/igralci.pdf", width=8.27, height=11.96)
 plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
 text(koordinate,labels=imena.drzav,pos = 1, cex = 0.25,)
 points(coordinates(stadion), type = "p", pch = 1, cex = 0.1, col = "red")
-legend("topleft", title = 'število igralcev po dravah', text.font = 3,legend = stevilo, fill = topo.colors(length(stevilo)))
+legend("topleft", title = 'Å¡tevilo igralcev po drÅ¾avah', text.font = 3,legend = stevilo, fill = topo.colors(length(stevilo)))
 dev.off()
 
 
@@ -93,13 +93,13 @@ dev.off()
 # # Preuredimo podatke, da jih bomo lahko izrisali na zemljevid.
 # druzine <- preuredi(druzine, obcine)
 # 
-# # Izracunamo povprecno velikost druine.
+# # Izracunamo povprecno velikost druÅ¾ine.
 # druzine$povprecje <- apply(druzine[1:4], 1, function(x) sum(x*(1:4))/sum(x))
 # min.povprecje <- min(druzine$povprecje, na.rm=TRUE)
 # max.povprecje <- max(druzine$povprecje, na.rm=TRUE)
 # 
-# # Narišimo zemljevid v PDF.
-# cat("Rišem zemljevid...\n")
+# # NariÅ¡imo zemljevid v PDF.
+# cat("RiÅ¡em zemljevid...\n")
 # pdf("slike/povprecna_druzina.pdf", width=6, height=4)
 # 
 # n = 100
