@@ -22,7 +22,6 @@ barve.zemljevid[is.na(barve.zemljevid)] <- "white"
 mojsvet <- svet1[svet1$name_long %in% imenadrzav,]
 koordinate <- coordinates(mojsvet)
 imena.drzav <- as.character(mojsvet$name_long)
-imena.drzav1 <- as.character(mojsvet1$name_long)
 
 rownames(koordinate) <- imena.drzav
 koordinate["Spain",2] <- koordinate["Spain",2]+1.5
@@ -64,7 +63,6 @@ stadion<-data.frame("long" = c(-0.108611), "lat"= c(51.555))
 pdf("slike/igralci.pdf", width=8.27, height=11.96)
 plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
 text(koordinate,labels=imena.drzav,pos = 1, cex = 0.25,)
-#text(koordinate["Wales",1],koordinate["Wales",2],labels="Wales",srt = 90, cex = 0.25)
 points(coordinates(stadion), type = "p", pch = 1, cex = 0.1, col = "red")
 legend("topleft", title = 'število igralcev po državah', bg = "#EEEEEE", text.font = 3,legend = stevilo, fill = topo.colors(length(stevilo)))
 dev.off()
