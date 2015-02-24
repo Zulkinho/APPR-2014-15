@@ -1,4 +1,4 @@
-#uvozim tabelo ZADNJIH50
+#uvozim tabelo ZADNJIH50 
 ZADNJIH50<-read.csv2("podatki/zadnjih50.csv",
                      skip=0,
                      row.name=1,
@@ -73,6 +73,17 @@ dev.off()
 
 ZADNJIH50[p1 %in% c(1,3,4),]
 #še ena potrditev kateri trije nogometaši so si izborili mesto med top 3
+
+
+#uvozim tabelo ARSENALSTATISTIKA, ki prikazuje statistiko Arsenala v zadnjih 10 sezona v Barclay Premier League 
+#na osnovi te tabele bom naredil napoved 
+
+ARSENALSTATISTIKA<-read.csv("podatki/arsenalstatistika.csv",
+                     skip=0,
+                     row.name=1,
+                     header=TRUE,
+                     na.strings = "-",
+                     fileEncoding = "Windows-1252")
 
 
 
