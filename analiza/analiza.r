@@ -1,10 +1,10 @@
 #uvozim tabelo ZADNJIH50
 ZADNJIH50<-read.csv2("podatki/zadnjih50.csv",
-                           skip=0,
-                           row.name=1,
-                           header=TRUE,
-                           na.strings = "-",
-                           fileEncoding = "Windows-1252")
+                     skip=0,
+                     row.name=1,
+                     header=TRUE,
+                     na.strings = "-",
+                     fileEncoding = "Windows-1252")
 
 
 #razdelitev v 4 skupine glede na kariero v vseh pomenih, iščemo kdo je bil najboljši
