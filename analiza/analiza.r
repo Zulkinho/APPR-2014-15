@@ -1,4 +1,4 @@
-#uvozim tabelo
+#uvozim tabelo ZADNJIH50
 ZADNJIH50<-read.csv2("podatki/zadnjih50.csv",
                            skip=0,
                            row.name=1,
