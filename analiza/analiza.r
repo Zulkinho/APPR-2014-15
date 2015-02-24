@@ -13,7 +13,11 @@ matrikarazdalj<-dist(normaliziran)
 razdelitev<- hclust(matrikarazdalj, method = "complete")
 
 pdf("slike/najboljsi.pdf")
+<<<<<<< HEAD
 plot(razdelitev, hang=-1, cex=0.6, main = "USPEŠNOST")
+=======
+plot(razdelitev, hang=-1, cex=0.6, main = "ZADNJIH50")
+>>>>>>> d134a6575edbbccdc0f3233f71dd67f92bd0ed75
 rect.hclust(razdelitev,k=4,border="red")
 dev.off()
 #iz grafa vidimo kdo sta nogometaša, ki sta se v svoji karieri najbol izkazala ter na vseh področjih kot celoti dosegla najboljše rezultate
@@ -41,7 +45,11 @@ ZADNJIH50[p %in% c(1),]
 razdelitev1 <- hclust(matrikarazdalj, method = "single")
 
 pdf("slike/najboljsi2.pdf")
+<<<<<<< HEAD
 plot(razdelitev1, hang=-1, cex=0.6, main = "USPEŠNOST 1")
+=======
+plot(razdelitev1, hang=-1, cex=0.6, main = "ZADNJIH50")
+>>>>>>> d134a6575edbbccdc0f3233f71dd67f92bd0ed75
 rect.hclust(razdelitev1,k=4,border="red")
 dev.off()
 #iz grafa vidimo, da je to Robin van Persie, poleg pa graf še dodatno potrjuje katera dva sta najboljša
@@ -52,6 +60,7 @@ dev.off()
 #normiliziral bom sedaj le dolžino kariere v Arsenalu, zadetke za Arsenal, ter nastope za Arsenal saj je to le bistvo projekta(analiza Arsenala)
 norm <- scale(as.matrix(ZADNJIH50[c(7:8, 10)]))
 matrikarazdalj1<-dist(norm)
+<<<<<<< HEAD
 razdelitev2 <- hclust(matrikarazdalj1, method = "single")
 
 pdf("slike/najboljsiArsenal.pdf")
@@ -60,10 +69,20 @@ rect.hclust(razdelitev2,k=4,border="red")
 dev.off()
 #graf trdi da najbol izstopa Henry, Bergkamp za njim, 3. najboljši igralec pa naj bi spet bil van Persie  
 #poglejmo če to drži
+=======
+razdelitev2 <- hclust(matrikarazdalj1, method = "complete")
+
+pdf("slike/najboljsiArsenal.pdf")
+plot(razdelitev2, hang=-1, cex=0.6, main = "ZADNJIH50")
+rect.hclust(razdelitev2,k=4,border="red")
+dev.off()
+#Graf trdi da najbol izstopa Henry, poglejmo če to drži
+>>>>>>> d134a6575edbbccdc0f3233f71dd67f92bd0ed75
 
 p1<- cutree(razdelitev2, k=4)
 table(p1)
 barve
+<<<<<<< HEAD
 
 pdf("slike/najboljsiArsenal1.pdf")
 pairs(norm, col = barve[p1])
@@ -73,6 +92,15 @@ dev.off()
 
 ZADNJIH50[p1 %in% c(1,3,4),]
 #še ena potrditev kateri trije nogometaši so si izborili mesto med top 3
+=======
+pdf("slike/najboljsiArsenal1.pdf")
+pairs(normaliziran, col = barve[p1])
+dev.off()
+#vidimo, da najbolj odstopa rumeni krogec(je osamelec)
+
+ZADNJIH50[p1 %in% c(4),]
+#potrditev da je najboljši igralec Arsenala med zadnjimi 50 igralci Thierry Henry, ki tudi v splošnem velja za najboljšega igralca vseh časov v klubu
+>>>>>>> d134a6575edbbccdc0f3233f71dd67f92bd0ed75
 
 
 
