@@ -102,6 +102,13 @@ kvad<-lm(tocke~I(leta^2)+leta)
 loess<-loess(tocke~leta)
 #curve(predict(loess, data.frame(leta=x)),add=TRUE,col="green")
 
+<<<<<<< HEAD
+=======
+#model Loess
+loess<-loess(tocke~leta)
+#curve(predict(loess, data.frame(leta=x)),add=TRUE,col="green")
+
+>>>>>>> f0a9658dfcadc334747b4ecde3a91f526e040a4f
 #model gam
 library(mgcv)
 gam<-gam(tocke~s(leta))
@@ -121,7 +128,10 @@ plot(leta,tocke,xlim=c(2005,2024),ylim=c(60,114),
      main="Napoved za število točk ob koncu prvenstva do leta 2024")
 curve(napoved(x, lin), add=TRUE,col="red")
 curve(napoved(x, kvad), add=TRUE, col="blue")
+<<<<<<< HEAD
 curve(napoved(x, loess), add=TRUE, col="green")
+=======
+>>>>>>> f0a9658dfcadc334747b4ecde3a91f526e040a4f
 legend("topright", c("Linerana metoda", "Kvadratna metoda"),lty=c(1,1), col = c("red","blue"))
 dev.off()
 
