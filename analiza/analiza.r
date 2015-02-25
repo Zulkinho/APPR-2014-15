@@ -77,7 +77,6 @@ ZADNJIH50[p1 %in% c(1,3,4),]
 
 #uvozim tabelo ARSENALSTATISTIKA, ki prikazuje statistiko Arsenala v zadnjih 10 sezona v Barclay Premier League 
 #na osnovi te tabele bom naredil napoved 
-
 ARSENALSTATISTIKA<-read.csv("podatki/arsenalstatistika.csv",
                      skip=0,
                      row.name=1,
@@ -86,7 +85,45 @@ ARSENALSTATISTIKA<-read.csv("podatki/arsenalstatistika.csv",
                      fileEncoding = "Windows-1252")
 
 
+leta<-row.names(ARSENALSTATISTIKA)
+leta<-as.numeric(leta)
+tocke<-ARSENALSTATISTIKA$TOCKE  
+#plot(leta, govedo, xlab="Leto", ylab="Točke")
 
+#funikcija za linearno rast
+lin<-lm(tocke~leta)
+#abline(lin, col="red")
+
+#preverimo če je število točk kvadratna funkcija
+kvad<-lm(tocke~I(leta^2)+leta)
+#curve(predict(kvad, data.frame(leta=x)),add=TRUE,col="blue")
+
+#model Loess
+loess<-loess(tocke~leta)
+#curve(predict(loess, data.frame(leta=x)),add=TRUE,col="green")
+
+#model gam
+library(mgcv)
+gam<-gam(tocke~s(leta))
+#curve(predict(loess, data.frame(leta=x)),add=TRUE,col="green")
+#vidimo da se gam ujema z linearno medoto zato le te ne upostevamo več saj bo napoved enako kot pri linearni metodi
+
+#pogledamo ostanke pri teh modelih
+#ostanki<-sapply(list(lin, kvad, loess,gam), function(x) sum(x$residuals^2))
+#ostanki
+#ostanki gam in lin so enaki
+
+#napoved za število točk do leta 2024 po različnih modelih
+pdf("slike/napoved.pdf")
+napoved<-function(x,model){predict(model,data.frame(leta=x))}
+plot(leta,tocke,xlim=c(2005,2024),ylim=c(60,114),
+     xlab="Leto",ylab="Število točk ob koncu prvenstva",
+     main="Napoved za število točk ob koncu prvenstva do leta 2024")
+curve(napoved(x, lin), add=TRUE,col="red")
+curve(napoved(x, kvad), add=TRUE, col="blue")
+curve(napoved(x, loess), add=TRUE, col="green")
+legend("topright", c("Linerana metoda", "Kvadratna metoda"),lty=c(1,1), col = c("red","blue"))
+dev.off()
 
 
 # # 4. faza: Analiza podatkov
