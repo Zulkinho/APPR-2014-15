@@ -12,7 +12,7 @@ normaliziran <- scale(as.matrix(ZADNJIH50[c(4:5, 7:13)]))
 matrikarazdalj<-dist(normaliziran)
 razdelitev<- hclust(matrikarazdalj, method = "complete")
 
-pdf("slike/najboljsi.pdf")
+cairo_pdf("slike/najboljsi.pdf",family = "Arial")
 plot(razdelitev, hang=-1, cex=0.6, main = "USPEŠNOST")
 rect.hclust(razdelitev,k=4,border="red")
 dev.off()
@@ -25,7 +25,7 @@ barve=c("red", "green", "blue","yellow")
 table(p)
 barve
 
-pdf("slike/najboljsi1.pdf")
+cairo_pdf("slike/najboljsi1.pdf",family = "Arial")
 pairs(normaliziran, col = barve[p])
 dev.off()
 #graf prikazuje položaje osamelcev na pram ostalim
@@ -40,7 +40,7 @@ ZADNJIH50[p %in% c(1),]
 
 razdelitev1 <- hclust(matrikarazdalj, method = "single")
 
-pdf("slike/najboljsi2.pdf")
+cairo_pdf("slike/najboljsi2.pdf",family = "Arial")
 plot(razdelitev1, hang=-1, cex=0.6, main = "USPEŠNOST 1")
 rect.hclust(razdelitev1,k=4,border="red")
 dev.off()
@@ -54,7 +54,7 @@ norm <- scale(as.matrix(ZADNJIH50[c(7:8, 10)]))
 matrikarazdalj1<-dist(norm)
 razdelitev2 <- hclust(matrikarazdalj1, method = "single")
 
-pdf("slike/najboljsiArsenal.pdf")
+cairo_pdf("slike/najboljsiArsenal.pdf",family = "Arial")
 plot(razdelitev2, hang=-1, cex=0.6, main = "USPEŠNPST ARSENAL")
 rect.hclust(razdelitev2,k=4,border="red")
 dev.off()
@@ -65,7 +65,7 @@ p1<- cutree(razdelitev2, k=4)
 table(p1)
 barve
 
-pdf("slike/najboljsiArsenal1.pdf")
+cairo_pdf("slike/najboljsiArsenal1.pdf",family = "Arial")
 pairs(norm, col = barve[p1])
 dev.off()
 #vidimo, da najbolj odstopa rdeči, rumeni in modri krogec(so osamelci)
@@ -114,7 +114,7 @@ gam<-gam(tocke~s(leta))
 #ostanki gam in lin so enaki
 
 #napoved za število točk do leta 2024 po različnih modelih
-pdf("slike/napoved.pdf")
+cairo_pdf("slike/napoved.pdf",family = "Arial")
 napoved<-function(x,model){predict(model,data.frame(leta=x))}
 plot(leta,tocke,xlim=c(2005,2024),ylim=c(60,114),
      xlab="Leto",ylab="Število točk ob koncu prvenstva",

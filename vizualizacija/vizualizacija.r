@@ -60,7 +60,7 @@ koordinate["Togo",1] <- koordinate["Togo",1]+0.9
 koordinate["Belgium",2] <- koordinate["Belgium",2]+2.2
 stadion<-data.frame("long" = c(-0.108611), "lat"= c(51.555))
 
-pdf("slike/igralci.pdf", width=8.27, height=11.96)
+cairo_pdf("slike/igralci.pdf", width=8.27, height=11.96,family = "Arial")
 plot(svet1, xlim=c(-69, 50), ylim=c(-33,73), col=barve.zemljevid, bg="lightblue")
 text(koordinate,labels=imena.drzav,pos = 1, cex = 0.25,)
 points(coordinates(stadion), type = "p", pch = 1, cex = 0.1, col = "red")
