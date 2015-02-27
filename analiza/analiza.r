@@ -80,6 +80,7 @@ cairo_pdf("slike/najboljsiArsenal2.pdf",family = "Arial")
 plot(razdelitev3, hang=-1, cex=0.6, main = "USPEŠNOST V ARSENALU")
 rect.hclust(razdelitev3,k=6,border="red")
 dev.off()
+skupine1 <- cutree(razdelitev3, k=6)
 #skupine bom karakteriziral v poročilu
 
 ##poglejmo sedaj še ward metodo za igralce v celotni karieri
@@ -88,6 +89,8 @@ cairo_pdf("slike/najboljsi3.pdf",family = "Arial")
 plot(razdelitev4, hang=-1, cex=0.6, main = "USPEŠNOST")
 rect.hclust(razdelitev4,k=6,border="red")
 dev.off()
+skupine1 <- cutree(razdelitev4, k=6)
+
 #skupine bom karakteriziral v poročilu
 
 #uvozim tabelo ARSENALSTATISTIKA, ki prikazuje statistiko Arsenala v zadnjih 10 sezona v Barclay Premier League 
