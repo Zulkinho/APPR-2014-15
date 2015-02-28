@@ -54,7 +54,7 @@ cairo_pdf("slike/najboljsi3.pdf",family = "Arial")
 plot(razdelitev4, hang=-1, cex=0.6, main = "USPEŠNOST")
 rect.hclust(razdelitev4,k=6,border="red")
 dev.off()
-skupine1 <- cutree(razdelitev4, k=6)
+skupine <- cutree(razdelitev4, k=6)
 #skupine bom karakteriziral v poročilu
 
 #poglejmo si sedaj kdo pa je bil najboljši za Arsenal

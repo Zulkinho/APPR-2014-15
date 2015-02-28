@@ -102,18 +102,18 @@ Zemljevid torej prikazuje vse države iz katerih so ali še prihajajo igralci Ar
 \includepdf[pages={1}]{../slike/igralci.pdf}
 
 \section{NAPREDNA ANALIZA PODATKOV}
-Četrto fazo projekta sem pričel z uvozom tabele v CSV obliki. Tabela \verb|ZADNJIH50| prikazuje podatke o zadnjih pedesetih nogometaših, ki so zaigrali za Arsenal. Tabelo sem sestavil sam iz že znanih podatkov, ki sem jih dobil iz tabele \verb|NOGOMETASI| in pa podatkov, ki sem jih poiskal iz različnih spletnih straneh. Imena stolpcev v tabeli so imena zadnjih predesetih nogometasev iz tabele \verb|NOGOMETASI|. Tabela pa vsebuje tudi stolpce \verb|DRZAVA| (dobil sem ga iz tabele \verb|NOGOMETASI| in pove iz katere države prihaja posamezen igralec- imenska spremenljivka), \verb|POZICIJA| (stolpec dobljen iz tabele \verb|NOGOMETASI|,ki pove igralno mesto igralca v mednarodnih kraticah- imenska spremenljivka) , \verb|VISINA|(stolpec podatkov o telesni višini igralca- številska spremenljivka, \verb|TRAJANJE.KARIERE| (pove dolžino celotne profesionalne kariere igralca v letih- številska spremenljivka), \verb|STEVILO.KLUBOV.V.KARIERI| (pove za koliko različnih klubov je igralec igral v svoji karieri- številska spremenljivka), \verb|LETNICE.DELOVANJA.V.ARSENALU| (stolpec podatkov dobljen iz tabele \verb|NOGOMETASI|, ki pove od katerega do katerega leta je igralec igral za Arsenal- številska spremenljivka), \verb|TRAJANJE.KARIERE.V.ARSENALU| (stolpec podatkov, ki pove koliko let je igralec igral za Arsenal- številska spremenljivka), \verb|NASTOPI.ZA.ARSENAL| (stolpec podatkov dobljen iz tabele \verb|NOGOMETASI|,ki pove koliko nastopov je igralec zbral za Arsenal- številska spremenljivka), \verb|NASTOPI.ZA.DRUGE.KLUBE| (pove število nastopov, ki jih je igralec zbral za ostale klube ne Arsenal- številska spremenljivka), \verb|ZADETKI.ZA.ARSENAL| (stolpec dobljen iz tabele \verb|NOGOMETASI|, ki pove koliko zadetkov je vsak igralec zabil za Arsenal- številska spremenljivka), \verb|ZADETKI.ZA.DRUGE.KLUBE| (stolpec pove koliko zadetkov je igralec zabil za klube ko ni igral za Arsenal- številska spremenljivka), \verb|REPREZENTANCNI.NASTOPI| (stolpec, ki pove število reprezentančnih nastopov- številska spremenljivka), \verb|REPREZENTANCNI.ZADETKI| (stolpec, ki pove število raprezentančnih golov- številska spremenljivka).
+Četrto fazo projekta sem pričel z uvozom tabele v CSV obliki. Tabela \verb|ZADNJIH50| prikazuje podatke o zadnjih pedesetih nogometaših, ki so zaigrali za Arsenal. Tabelo sem sestavil sam iz že znanih podatkov, ki sem jih dobil iz tabele \verb|NOGOMETASI| in pa podatkov, ki sem jih poiskal iz različnih spletnih strani. Imena stolpcev v tabeli so imena zadnjih predesetih nogometasev iz tabele \verb|NOGOMETASI|. Tabela pa vsebuje tudi stolpce \verb|DRZAVA| (dobil sem ga iz tabele \verb|NOGOMETASI| in pove iz katere države prihaja posamezen igralec- imenska spremenljivka), \verb|POZICIJA| (stolpec dobljen iz tabele \verb|NOGOMETASI|,ki pove igralno mesto igralca v mednarodnih kraticah- imenska spremenljivka) , \verb|VISINA|(stolpec podatkov o telesni višini igralca- številska spremenljivka, \verb|TRAJANJE.KARIERE| (pove dolžino celotne profesionalne kariere igralca v letih- številska spremenljivka), \verb|STEVILO.KLUBOV.V.KARIERI| (pove za koliko različnih klubov je igralec igral v svoji karieri- številska spremenljivka), \verb|LETNICE.DELOVANJA.V.ARSENALU| (stolpec podatkov dobljen iz tabele \verb|NOGOMETASI|, ki pove od katerega do katerega leta je igralec igral za Arsenal- številska spremenljivka), \verb|TRAJANJE.KARIERE.V.ARSENALU| (stolpec podatkov, ki pove koliko let je igralec igral za Arsenal- številska spremenljivka), \verb|NASTOPI.ZA.ARSENAL| (stolpec podatkov dobljen iz tabele \verb|NOGOMETASI|,ki pove koliko nastopov je igralec zbral za Arsenal- številska spremenljivka), \verb|NASTOPI.ZA.DRUGE.KLUBE| (pove število nastopov, ki jih je igralec zbral za ostale klube ne Arsenal- številska spremenljivka), \verb|ZADETKI.ZA.ARSENAL| (stolpec dobljen iz tabele \verb|NOGOMETASI|, ki pove koliko zadetkov je vsak igralec zabil za Arsenal- številska spremenljivka), \verb|ZADETKI.ZA.DRUGE.KLUBE| (stolpec pove koliko zadetkov je igralec zabil za klube ko ni igral za Arsenal- številska spremenljivka), \verb|REPREZENTANCNI.NASTOPI| (stolpec, ki pove število reprezentančnih nastopov- številska spremenljivka), \verb|REPREZENTANCNI.ZADETKI| (stolpec, ki pove število raprezentančnih golov- številska spremenljivka).
 
 Za uvozom tabele \verb|ZADNJIH50| pa sem se lotil analize. Zastavil sem si vprašanje, kateri igralec je dosegel največ v svoji karieri nasploh. Ta podatek sem dobil s hierarhičnim razvrščanjem v skupine.
 
-Iz podatkov tabele \verb|ZADNJIH50| sem normaliziral podatke iz stolpcev \verb|TRAJANJE.KARIERE|, \verb|STEVILO.KLUBOV.V.KARIERI|, \verb|TRAJANJE.KARIERE.V.ARSENALU|, \verb|NASTOPI.ZA.ARSENAL|, \verb|NASTOPI.ZA.DRUGE.KLUBE|, \verb|ZADETKI.ZA.ARSENAL|,  \verb|ZADETKI.ZA.DRUGE.KLUBE|, \verb|REPREZENTANCNI.NASTOPI|, \verb|REPREZENTANCNI.ZADETKI|. Nato sem z funkcijo dist() dobil matriko razdal, ki je potrebna za hierarhično razvrščanje. Razdelitev sem opravil z metodo complete in dobil dendogram, na katerem sem igralce razdelil v štiri skupine.
+Iz tabele \verb|ZADNJIH50| sem normaliziral podatke iz stolpcev \verb|TRAJANJE.KARIERE|, \verb|STEVILO.KLUBOV.V.KARIERI|, \verb|TRAJANJE.KARIERE.V.ARSENALU|, \verb|NASTOPI.ZA.ARSENAL|, \verb|NASTOPI.ZA.DRUGE.KLUBE|, \verb|ZADETKI.ZA.ARSENAL|,  \verb|ZADETKI.ZA.DRUGE.KLUBE|, \verb|REPREZENTANCNI.NASTOPI|, \verb|REPREZENTANCNI.ZADETKI|. Nato sem z funkcijo dist() dobil matriko razdal, ki je potrebna za hierarhično razvrščanje. Razdelitev sem opravil z metodo complete in dobil dendrogram, na katerem sem igralce razdelil v štiri skupine.
 
 \makebox[\textwidth][c]{
 \includegraphics[width=1.2\textwidth]{../slike/najboljsi.pdf}
 }
 
-Dendogram  prikazuje razdelitev v štiri skupine glede na dosežke posameznega nogometaša.
-Iz grafa lahko vidimo, da ste najboljša igralca med zadnjimi pedesetimi Henry in Bergkamp, ki ju najdemo v prvi skupini. 
+Dendrogram  prikazuje razdelitev v štiri skupine glede na dosežke posameznega nogometaša.
+Iz dendrograma lahko vidimo, da ste najboljša igralca med zadnjimi pedesetimi Henry in Bergkamp, ki ju najdemo v prvi skupini. 
 \newpage
 \indent Ko sem dobil dendogram sem se vprašal kako bi lahko dokazal trditev, da sta Henry in Bergkamp res najboljša. Podatek sem dobil ko sem narisal grafe parov.
 
@@ -124,20 +124,84 @@ Iz grafa lahko vidimo, da ste najboljša igralca med zadnjimi pedesetimi Henry i
 Vidimo, da rdeča krogca odstopata od krogcov ostalih barv, ki prikazujejo nogometaše ostalih skupin. Henry in Bergkamp sta torej osamelca, kar dokazuje da sta res najboljša.
 \newpage
 
-Zatem sem se vprašal kdo pa je tretji najboljši igralec med zadnjimi pedesetimi nogometasi. Odgovor sem dobil, ko sem naredil novo hierarhično razdelitev v štiri skupine z metodo enojnega povezovanja. Dobil sem naslednji dendogram.
+Zatem sem se vprašal kdo pa je tretji najboljši igralec med zadnjimi pedesetimi nogometasi. Odgovor sem dobil, ko sem naredil novo hierarhično razdelitev v štiri skupine z metodo enojnega povezovanja. Dobil sem naslednji dendrogram.
 
 \makebox[\textwidth][c]{
 \includegraphics[width=1.2\textwidth]{../slike/najboljsi2.pdf}
 }
 
-Dendogram prikazuje hierarhično razvrščanje v štiri skupine z metodo enojnega povezovanja. Vidimo, da se dendogram že v začetku deli na dva dela. En del vsebuje Henrya in Bergkampa, drugi pa ostale nogometaše. Del z ostalimi se nato deli še na dva dela. Od tod lahko vidimo, da je tretji najboljši igralec Robin van Persie. Tako lahko trdimo, da so trije najboljši igralci med zadnjimi pedesetimi Henry,Bergkamp in van Persie.
+Dendrogra prikazuje hierarhično razvrščanje v štiri skupine z metodo enojnega povezovanja. Vidimo, da se dendogram že v začetku deli na dva dela. En del vsebuje Henrya in Bergkampa, drugi pa ostale nogometaše. Del z ostalimi se nato deli še na dva dela. Od tod lahko vidimo, da je tretji najboljši igralec Robin van Persie. Tako lahko trdimo, da so trije najboljši igralci med zadnjimi pedesetimi Henry,Bergkamp in van Persie.
 
 \newpage
-Po nasvetu profesorja sem se odočil, da prikažem še hierarhično razvrščanje glede na uspešnost igralcev v karieri z metodo ward in karakteriziram vsako dobljeno skupino. Tokrat sem igralce razdelil v šest skupin.
+Po nasvetu profesorja sem se odočil, da prikažem še hierarhično razvrščanje glede na uspešnost igralcev v karieri z metodo ward. Tokrat sem igralce razdelil v šest skupin. 
 
 \makebox[\textwidth][c]{
 \includegraphics[width=1.2\textwidth]{../slike/najboljsi3.pdf}
 }
 
+Dendrogram prikazuje šest glede na dosežke vsakega igralca posebej. Podatek v katero skupino spada vsak posamičen nogometaš dobimo s pomočjo funkcije cutree(). Vektor, ki to pove sem poimenoval skupine. S pomočjo vektorja skupine vidimo, da sta Henry in Bergkamp v skupini 1. Tudi s pomočjo tega dendograma je vidno, da sta najboljša. Naslabše rezultate pa imajo igralci v skupini 4.
 
+\newpage
+Zatem se mi je porodilo vprašanje, kateri trije igralci pa so največji pečat pustili v Arsenalu. To je bil tudi cilj naloge, ugotoviti kdo je bil najboljši znotraj kluba. Sedaj sem za izračun matrike razdalj uporabil le podatke, ki se navezujejo na kariero v Arsenalu. Normaliziral sem podatke iz stolpcev \verb|TRAJANJE.KARIERE.V.ARSENALU|, \verb|NASTOPI.ZA.ARSENAL| in \verb|ZADETKI.ZA.ARSENAL|. S pomočjo izračunane matrike razdalj sem dobil nov dendrogram, ki prikazuje hierarhično razdelitev podatkov z metodo enojnega povezovanja. Podatke sem ponovno razvrstil v štiri skupine.
+
+\makebox[\textwidth][c]{
+\includegraphics[width=1.2\textwidth]{../slike/najboljsiArsenal.pdf}
+}
+
+Dendrogram prikazuje razdelitev glede na dosežke vsakega igralca posebej za FC Arsenal. Iz dendrograma vidimo, da je najboljši igralec Thiery Henry. Sledita mu ponovno Dennis Bergkamp kot drugi najboljši in pa Robin van Persie kot tretji.
+
+\newpage
+Da sem se prepričal, da trditev o treh najboljših drži sem ponovno narisal grafe parov.
+
+\makebox[\textwidth][c]{
+\includegraphics[width=1.2\textwidth]{../slike/najboljsiArsenal1.pdf}
+}
+
+Grafi prikazujejo razmerja med posameznimi spremenjivkami, ki sem jih normaliziral ob izračunu matrike razdalj. Vidimo da modri, rumeni in rdeči krogec močno odstopajo od ostalih. S pomočjo preprostih ukazov sem ugotovil, da modri krogec predstavlja Henrya, rdeči Bergkampa, rumeni pa van Persie-ja. Iz grafov vidimo, da modri krogec res najbol odsopa od ostalih, tudi od rdečega in rumenega. Rdeči krogec, ki predstavlja  Bergkampa zaostaja za modrim a še vedno odstopa od rumenega in ostalih zelenih krogcev. Za rumeni krogec pa vidimo da odstopa od ostalih zelenih krogcev, vendar zaostaja za obema tako rdečim, kot tudi modrim krogcem. S tem je bila naša trditev, da so najboljši trije igralci v zgodovini Arsenala Thiery Henry, Dennis Bergkamp in Robin van Persie.
+
+Podobno vidimo tudi z metodo minimalne variance. 
+
+\makebox[\textwidth][c]{
+\includegraphics[width=1.2\textwidth]{../slike/najboljsiArsenal2.pdf}
+}
+
+Graf prikazuje hierarhično razvrščanje po Wardovi metodi najmanjše variance v šest skupin.
+Vidimo da sta Henry in Berkamp res najboljša, sledi pa jima van Persie. Iz grafa vidimo, da za Robinom veliko ne zaostaja Robert Pires.
+
+\newpage
+Na tej stopni sem zaključil z grupiranjem v skupine in se osredotočil na napoved podatkov. Za cilj sem si zadal, da napovem število danih in prejetih golov v angleški Barclays Premier League za naslednjih deset let glede na podlagi podatkov za zadnjih deset let oziroma sezon.
+
+Da sem lahko to naredil sem za začetek potreboval novo tabelo. Zbral sem potake z uradne strani  
+Barclays Premier League in dobil tabelo \verb|ARSENALSTATISTIKA|, ki sem jo v program uvozil s pomočjo uvoza za CSV datoteko. Tabelo sestavljajo same številske spremenljivke, pri čemer so imena vrstic letnice konca vsake sezone za deset let nazaj. Tabelo sestavljajo stolpci \verb|STEVILO.TEKEM| (koliko tekem se je odigralo), \verb|ZMAGE| (koliko zmag je dosegel Arsenal), \verb|NEODLOCENO| (kolikokrat je Arsenal igral neodločeno), \verb|PORAZI| (kolikokrat je izgubil), \verb|DANI.ZADETKi| (koliko golov je dosegel), \verb|PREJETI.ZADETKI| (koliko golov je prejel), \verb|GOL.DIFERENCA| (razlika med prejetimi in danimi goli), \verb|TOCKE| (kaliko toč je zbral) in \verb|KONCNO.MESTO| (katero končno mesto je Arsenal dosegel).
+
+Za uvozem tabele sem se lotil napovedi za dane in prejete zadetke vse do leta 2024. Napoved sem naredil na podlagi grafov, ki sem ju dobil s pomočjo funkcije barplot(). Na njem so s pikicami označene vrednosti za dane in prejete zadetke od leta 2005 do 2014. Na grafu pa so prikazane tudi tri krivulje s tremi različnimi barvami za tri različne tipe napovedi.
+
+\makebox[\textwidth][c]{
+\includegraphics[width=1.2\textwidth]{../slike/napoved.pdf}
+}
+
+Graf prikazuje vrednosti za dane zadetke od leta 2005 do 2014 in krivulje linearne, kvadratne in gam napovedi do leta 2024. Vidimo, da bo število danih zadetkov od leta 2014 z linearno in gam metodo padalo, s kvadratno pa raslo. Po metodi gam naj bi leta 2024 padlo manj kot 40 zadetkov v sezoni. Glede na izkušnje in poznavanje kluba lahko trdim, da se to ne bo zgodilo saj klub vsako leto producira nove nevarne napadalce, ki so med najboljšimi v ligi. Bolj realni sta linearna in kvadratna metoda, vendar pri kvadratni vrednosti rastejo, pri linearni pa padajo. Kvadratna metoda napoveduje da bo Arsenal v letu 2024 zabil celo cez 90 zadetkov. Trditev, da to ni možno je napačna, vendar se kvaliteta moštev in enakovrednost v ligi vsako leto povečujeta. Na podlagi tega je možnost za to napoved majhna a mogoča. Najbolj realna je po mojem mnenju napoved z linearno metodo. Število zadetkov bo padalo iz leta v leto vendar se bo le to gibalo nekje okoli 70 zadetkov na sezono. 
+
+\makebox[\textwidth][c]{
+\includegraphics[width=1.2\textwidth]{../slike/napoved1.pdf}
+}
+
+Graf prikazuje vrednosti za prejete zadetke od leta 2005 do 2014 in krivulje linearne, kvadratne in gam napovedi do leta 2024. Vidimo, da bo število prejetih zadetkov s kvadratno in gam metodo od leta 2014 naprej padalo, z linearno pa raslo. Po metodi gam naj bi leta 2024 Arsenal prejel manj kot 30 zadetkov. Glede na dosedanje sezone bi bilo to možno saj je v letih 2006 in 2008 Arsenal prejel zgolj 31 zadetkov. Napoved je možna a malo vrjetna saj se to v zadnjih desetih sezonah še ni zgodilo. Po linearni metodi bo število prejetih zadetkov močno raslo. Leta 2024 pa naj bi Arsenal prejel kar 55 zadetkov. Ta napoved se mi ne zdi možna saj Arsenal vsako leto kreira vhr prvenstvene lestvice, kar pa s takim številom prejetih zadetkov nebi bilo izvedljivo. Prav zako Arsenal v zadnjih desetih letih ni prejel več kot 50 zadetkov na sezono. Po mojem mnenju je najbolj realna napoved s kvadratno metodo. Število prejetih zadetkov naj bi nekje do leta 2015 počasi raslo, kar je posledica rasti prejetih zadetkov v zadnjih dveh sezonah. Po rasti pa naj bi do leta 2024 padalo, vse pa naj bi potekalo med vrednostima 40 in 45 prejetih golov v sezoni. Ta napoved je smiselna in uresničjiva tudi zaradi že omenjene vedno boljše enakosti in  kvalitete ekip v angleški ligi. 
+
+Nogomet pa je nepredvidljiva igra kjer je žoga okrogla. Zato je zelo težko za vsako ekipo napovedati kako se bo izkazala v prihodnjih sezonah, saj se lahko v razplet umešajo tudi poškodbe in ostali izven nogometni dejavniki.
+
+\begin{thebibliography}{9}
+
+\bibitem{1}
+  \url{http://en.wikipedia.org/wiki/List_of_Arsenal_F.C._players},
+  {Accessed: 5-12-2014}
+\bibitem{2}
+  \url{http://arsenal.com},
+  {Accessed: 24-02-2015}
+\bibitem{3}
+  \url{http://premierleague.com/en-gb/matchday/league-table.html},
+  {Accessed: 25-02-2015}
+
+\end{thebibliography}
+  
 \end{document}
