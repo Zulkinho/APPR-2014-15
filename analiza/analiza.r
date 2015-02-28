@@ -48,6 +48,15 @@ dev.off()
 
 #tako lahko trdimo, da so trije najboljši igralci med zadnjimi pedesetimi Henry,Bergkamp in van Persie
 
+##poglejmo sedaj še ward metodo za igralce v celotni karieri
+razdelitev4 <- hclust(matrikarazdalj, method = "ward")
+cairo_pdf("slike/najboljsi3.pdf",family = "Arial")
+plot(razdelitev4, hang=-1, cex=0.6, main = "USPEŠNOST")
+rect.hclust(razdelitev4,k=6,border="red")
+dev.off()
+skupine1 <- cutree(razdelitev4, k=6)
+#skupine bom karakteriziral v poročilu
+
 #poglejmo si sedaj kdo pa je bil najboljši za Arsenal
 #normiliziral bom sedaj le dolžino kariere v Arsenalu, zadetke za Arsenal, ter nastope za Arsenal saj je to le bistvo projekta(analiza Arsenala)
 norm <- scale(as.matrix(ZADNJIH50[c(7:8, 10)]))
@@ -81,16 +90,6 @@ plot(razdelitev3, hang=-1, cex=0.6, main = "USPEŠNOST V ARSENALU")
 rect.hclust(razdelitev3,k=6,border="red")
 dev.off()
 skupine1 <- cutree(razdelitev3, k=6)
-#skupine bom karakteriziral v poročilu
-
-##poglejmo sedaj še ward metodo za igralce v celotni karieri
-razdelitev4 <- hclust(matrikarazdalj, method = "ward")
-cairo_pdf("slike/najboljsi3.pdf",family = "Arial")
-plot(razdelitev4, hang=-1, cex=0.6, main = "USPEŠNOST")
-rect.hclust(razdelitev4,k=6,border="red")
-dev.off()
-skupine1 <- cutree(razdelitev4, k=6)
-
 #skupine bom karakteriziral v poročilu
 
 #uvozim tabelo ARSENALSTATISTIKA, ki prikazuje statistiko Arsenala v zadnjih 10 sezona v Barclay Premier League 
